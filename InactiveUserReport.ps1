@@ -18,3 +18,5 @@ Get-MsolUser | ForEach-Object {
         IsLicensed = $IsLicensed
         } | Export-Csv -path "C:\Admin Rapport\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv" -notype -Append 
 }
+Write-Output "Fin d'exécution de ce script, vous poouvez retrouver le rapport généré ici : C:\Admin Rapport\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv"
+Pause
