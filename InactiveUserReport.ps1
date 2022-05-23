@@ -4,6 +4,9 @@ Connect-ExchangeOnline
 
 #Récupération de la liste des utilisateurs et filtrage des résultats
 Get-MsolUser | ForEach-Object {
+
+    #WIP : exclusion des comptes externes (mention #EXT#) de la liste à exporter 
+
     $upn = $_.UserPrincipalName
     $LastLogonTime = (Get-MailboxStatistics -Identity $upn).lastlogontime
     $DisplayName = $_.DisplayName
@@ -18,5 +21,5 @@ Get-MsolUser | ForEach-Object {
         IsLicensed = $IsLicensed
         } | Export-Csv -path "C:\Admin Rapport\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv" -notype -Append 
 }
-Write-Output "Fin d'exécution de ce script, vous poouvez retrouver le rapport généré ici : C:\Admin Rapport\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv"
+Write-Output "Fin d'execution de ce script, vous poouvez retrouver le rapport genere ici : C:\Admin Rapport\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv"
 Pause
