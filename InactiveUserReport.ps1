@@ -1,3 +1,6 @@
+#Réinitialisation des variables
+$MBUserCount = 0
+
 #Connexion au Tenant O365
 Connect-MsolService
 Connect-ExchangeOnline
@@ -8,7 +11,7 @@ Get-MsolUser | ForEach-Object {
     #WIP : exclusion des comptes externes (mention #EXT#) de la liste à exporter 
 
     $upn = $_.UserPrincipalName
-    $LastLogonTime = (Get-MailboxStatistics -Identity $upn).lastlogontime
+    $LastLogonTime = (Get-MailboxStatistics -Identity $upn -erroraction 'silentlycontinue').lastlogontime
     $DisplayName = $_.DisplayName
     $IsLicensed = $_.IsLicensed
     $MBUserCount++
