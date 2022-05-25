@@ -3,7 +3,7 @@ $MBUserCount = 0
 
 #Connexion au Tenant O365
 Connect-MsolService
-Connect-ExchangeOnline
+Connect-ExchangeOnline -ShowBanner:$false
 
 #Récupération de la liste des utilisateurs et filtrage des résultats
 Get-MsolUser | ForEach-Object {
