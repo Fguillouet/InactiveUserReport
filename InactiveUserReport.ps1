@@ -1,9 +1,11 @@
-#Réinitialisation des variables
+#Réinitialisation de variables
 $MBUserCount = 0
 
 #Connexion au Tenant O365
 Connect-MsolService
 Connect-ExchangeOnline -ShowBanner:$false
+
+Clear-Host
 
 #Récupération de la liste des utilisateurs et filtrage des résultats
 Get-MsolUser | ForEach-Object {
