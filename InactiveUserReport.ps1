@@ -1,9 +1,29 @@
+Function Get-Folder($initialDirectory="")
+
+{
+    [System.Reflection.Assembly]::LoadWithPartialName("System.windows.forms")|Out-Null
+
+    $foldername = New-Object System.Windows.Forms.FolderBrowserDialog
+    $foldername.Description = "Sélectionnez un dossier"
+    $foldername.rootfolder = "MyComputer"
+    $foldername.SelectedPath = $initialDirectory
+
+    if($foldername.ShowDialog() -eq "OK")
+    {
+        $folder += $foldername.SelectedPath
+    }
+    return $folder
+}
+
 #Réinitialisation de variables
 $MBUserCount = 0
 
 #Connexion au Tenant O365
 Connect-MsolService
 Connect-ExchangeOnline -ShowBanner:$false
+
+#Récupérer le dossier de destination
+$DestinationFolder = Get-Folder
 
 Clear-Host
 
@@ -24,7 +44,10 @@ Get-MsolUser | ForEach-Object {
         Mail = $upn
         LastLogon = $LastLogonTime 
         IsLicensed = $IsLicensed
-        } | Export-Csv -path "C:\Admin Rapport\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv" -notype -Append 
+        } | Export-Csv -path $DestinationFolder"\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv" -notype -Append 
 }
-Write-Output "Fin d'execution de ce script, vous poouvez retrouver le rapport genere ici : C:\Admin Rapport\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv"
+
+Clear-Host
+
+Write-Output "Fin d'execution de ce script, vous poouvez retrouver le rapport genere ici : "$DestinationFolder"\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv"
 Pause
