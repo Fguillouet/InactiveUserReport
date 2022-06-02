@@ -37,7 +37,7 @@ Get-MsolUser | ForEach-Object {
     $DisplayName = $_.DisplayName
     $IsLicensed = $_.IsLicensed
     $MBUserCount++
-    Write-Progress -Activity "Processed mailbox count: $MBUserCount "`n"  Currently Processing: $DisplayName"
+    Write-Progress -Activity "Processed mailbox count: $MBUserCount "`n"Currently Processing: $DisplayName"
 
     [PSCustomObject]@{
         Name = $DisplayName
