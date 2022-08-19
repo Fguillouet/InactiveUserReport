@@ -29,8 +29,6 @@ Clear-Host
 #Récupération de la liste des utilisateurs et filtrage des résultats
 Get-MsolUser | ForEach-Object {
 
-    #WIP : exclusion des comptes externes (mention #EXT#) de la liste à exporter 
-
     $upn = $_.UserPrincipalName
     $LastLogonTime = (Get-MailboxStatistics -Identity $upn -erroraction 'silentlycontinue').lastlogontime
     $DisplayName = $_.DisplayName
