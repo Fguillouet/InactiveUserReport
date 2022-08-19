@@ -46,5 +46,5 @@ Get-MsolUser | ForEach-Object {
 
 Clear-Host
 
-Write-Output "Fin d'execution de ce script, vous poouvez retrouver le rapport genere ici : "$DestinationFolder"\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv"
+Write-Output "Fin d'execution de ce script, vous pouvez retrouver le rapport genere ici : "$DestinationFolder"\Utilisateurs inactifs $(get-date -f dd-MM-yyyy).csv"
 Pause
